@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+	<property name="now" value="now()" dbms="mysql,h2" />
+	<property name="now" value="current_timestamp" dbms="postgresql" />
+
+	<changeSet id="0004" author="yama2showcase">
+		<createTable tableName="yama2showcase_article_tags">
+			<column name="id" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="create_by" type="varchar(50)" />
+			<column name="create_date" type="datetime" />
+			<column name="update_by" type="varchar(50)" />
+			<column name="update_date" type="datetime" />
+			<column name="active_flag" type="int(10)" />
+
+			<column name="article_id" type="varchar(50)" />
+			<column name="tags" type="varchar(50)" />
+		</createTable>
+		
+		<addForeignKeyConstraint constraintName="fk_article_id"
+			baseTableName="yama2showcase_article_tags" baseColumnNames="article_id"
+			referencedTableName="yama2showcase_article" referencedColumnNames="id" />
+	</changeSet>
+</databaseChangeLog>
